@@ -147,19 +147,6 @@ return {
     },
   },
 
-  -- add pyright to lspconfig
-  {
-    "neovim/nvim-lspconfig",
-    ---@class PluginLspOpts
-    opts = {
-      ---@type lspconfig.options
-      servers = {
-        -- pyright will be automatically installed with mason and loaded with lspconfig
-        pyright = {},
-      },
-    },
-  },
-
   -- add tsserver and setup with typescript.nvim instead of lspconfig
   {
     "neovim/nvim-lspconfig",
@@ -192,6 +179,7 @@ return {
         -- Specify * to use this function as a fallback for any server
         -- ["*"] = function(server, opts) end,
       },
+      inlay_hints = { enabled = true },
     },
   },
 
@@ -267,6 +255,8 @@ return {
     "williamboman/mason.nvim",
     opts = {
       ensure_installed = {
+        "black",
+        "ruff",
         "stylua",
         "shellcheck",
         "shfmt",
@@ -353,25 +343,6 @@ return {
   {
     "pwntester/octo.nvim",
     event = "BufRead",
-  },
-  {
-    "tpope/vim-fugitive",
-    cmd = {
-      "G",
-      "Git",
-      "Gdiffsplit",
-      "Gread",
-      "Gwrite",
-      "Ggrep",
-      "GMove",
-      "GDelete",
-      "GBrowse",
-      "GRemove",
-      "GRename",
-      "Glgrep",
-      "Gedit",
-    },
-    ft = { "fugitive" },
   },
   {
     "lunarvim/colorschemes",
