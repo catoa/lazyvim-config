@@ -1,25 +1,8 @@
--- since this is just an example spec, don't actually load anything here and return an empty spec
--- stylua: ignore
-if true then return {} end
-
--- every spec file under the "plugins" directory will be loaded automatically by lazy.nvim
---
 -- In your plugin files, you can:
 -- * add extra plugins
 -- * disable/enabled LazyVim plugins
 -- * override the configuration of LazyVim plugins
 return {
-  -- add gruvbox
-  { "ellisonleao/gruvbox.nvim" },
-
-  -- Configure LazyVim to load gruvbox
-  {
-    "LazyVim/LazyVim",
-    opts = {
-      colorscheme = "gruvbox",
-    },
-  },
-
   -- change trouble config
   {
     "folke/trouble.nvim",
@@ -60,44 +43,6 @@ return {
         name = "copilot",
         group_index = 1,
         priority = 100,
-      })
-    end,
-  },
-  {
-    "nvim-lualine/lualine.nvim",
-    optional = true,
-    event = "VeryLazy",
-    opts = function(_, opts)
-      local Util = require("lazyvim.util")
-      local colors = {
-        [""] = Util.ui.fg("Special"),
-        ["Normal"] = Util.ui.fg("Special"),
-        ["Warning"] = Util.ui.fg("DiagnosticError"),
-        ["InProgress"] = Util.ui.fg("DiagnosticWarn"),
-      }
-      table.insert(opts.sections.lualine_x, 2, {
-        function()
-          local icon = require("lazyvim.config").icons.kinds.Copilot
-          local status = require("copilot.api").status.data
-          return icon .. (status.message or "")
-        end,
-        cond = function()
-          if not package.loaded["copilot"] then
-            return
-          end
-          local ok, clients = pcall(require("lazyvim.util").lsp.get_clients, { name = "copilot", bufnr = 0 })
-          if not ok then
-            return false
-          end
-          return ok and #clients > 0
-        end,
-        color = function()
-          if not package.loaded["copilot"] then
-            return
-          end
-          local status = require("copilot.api").status.data
-          return colors[status.status] or colors[""]
-        end,
       })
     end,
   },
@@ -153,7 +98,7 @@ return {
     dependencies = {
       "jose-elias-alvarez/typescript.nvim",
       init = function()
-        require("lazyvim.util").on_attach(function(_, buffer)
+        require("lazyvim.util").lsp.on_attach(function(_, buffer)
           -- stylua: ignore
           vim.keymap.set( "n", "<leader>co", "TypescriptOrganizeImports", { buffer = buffer, desc = "Organize Imports" })
           vim.keymap.set("n", "<leader>cR", "TypescriptRenameFile", { desc = "Rename File", buffer = buffer })
@@ -162,11 +107,6 @@ return {
     },
     ---@class PluginLspOpts
     opts = {
-      ---@type lspconfig.options
-      servers = {
-        -- tsserver will be automatically installed with mason and loaded with lspconfig
-        tsserver = {},
-      },
       -- you can do any additional lsp server setup here
       -- return true if you don't want this server to be setup with lspconfig
       ---@type table<string, fun(server:string, opts:_.lspconfig.options):boolean?>
@@ -180,33 +120,6 @@ return {
         -- ["*"] = function(server, opts) end,
       },
       inlay_hints = { enabled = true },
-    },
-  },
-
-  -- for typescript, LazyVim also includes extra specs to properly setup lspconfig,
-  -- treesitter, mason and typescript.nvim. So instead of the above, you can use:
-  { import = "lazyvim.plugins.extras.lang.typescript" },
-
-  -- add more treesitter parsers
-  {
-    "nvim-treesitter/nvim-treesitter",
-    opts = {
-      ensure_installed = {
-        "bash",
-        "html",
-        "javascript",
-        "json",
-        "lua",
-        "markdown",
-        "markdown_inline",
-        "python",
-        "query",
-        "regex",
-        "tsx",
-        "typescript",
-        "vim",
-        "yaml",
-      },
     },
   },
 
@@ -232,23 +145,6 @@ return {
       table.insert(opts.sections.lualine_x, "😄")
     end,
   },
-
-  -- or you can return new options to override all the defaults
-  {
-    "nvim-lualine/lualine.nvim",
-    event = "VeryLazy",
-    opts = function()
-      return {
-        --[[add your custom lualine config here]]
-      }
-    end,
-  },
-
-  -- use mini.starter instead of alpha
-  { import = "lazyvim.plugins.extras.ui.mini-starter" },
-
-  -- add jsonls and schemastore packages, and setup treesitter for json, json5 and jsonc
-  { import = "lazyvim.plugins.extras.lang.json" },
 
   -- add any tools you want to have installed below
   {
@@ -317,17 +213,27 @@ return {
     end,
   },
   {
-    "nacro90/numb.nvim",
-    event = "BufRead",
-  },
-  {
     "stevearc/dressing.nvim",
   },
-  { "embark-theme/vim", name = "embark" },
-  { "folke/tokyonight.nvim" },
-  { "cpea2506/one_monokai.nvim" },
-  { "shaeinst/roshnivim-cs" },
-  { "catppuccin/nvim" },
+  {
+    "tpope/vim-fugitive",
+    cmd = {
+      "G",
+      "Git",
+      "Gdiffsplit",
+      "Gread",
+      "Gwrite",
+      "Ggrep",
+      "GMove",
+      "GDelete",
+      "GBrowse",
+      "GRemove",
+      "GRename",
+      "Glgrep",
+      "Gedit",
+    },
+    ft = { "fugitive" },
+  },
   {
     "folke/lsp-colors.nvim",
     event = "BufRead",
@@ -344,21 +250,10 @@ return {
     "pwntester/octo.nvim",
     event = "BufRead",
   },
-  {
-    "lunarvim/colorschemes",
-  },
-  {
-    "EdenEast/nightfox.nvim",
-  },
-  {
-    "NLKNguyen/papercolor-theme",
-  },
   { "tpope/vim-eunuch" },
-  { "lunarvim/horizon.nvim" },
   {
     "nvim-treesitter/nvim-treesitter-context",
   },
-  { "glepnir/zephyr-nvim", dependencies = { "nvim-treesitter/nvim-treesitter", opt = true } },
   {
     "iamcco/markdown-preview.nvim",
     build = function()
@@ -371,76 +266,7 @@ return {
       "nvim-lua/plenary.nvim",
     },
   },
-  { "shaunsingh/moonlight.nvim" },
   { "rust-lang/rust.vim" },
-  {
-    "simrat39/rust-tools.nvim",
-    config = function()
-      local status_ok, rust_tools = pcall(require, "rust-tools")
-      if not status_ok then
-        return
-      end
-
-      local opts = {
-        tools = {
-          executor = require("rust-tools/executors").termopen, -- can be quickfix or termopen
-          reload_workspace_from_cargo_toml = true,
-          inlay_hints = {
-            auto = true,
-            only_current_line = false,
-            show_parameter_hints = true,
-            parameter_hints_prefix = "<-",
-            other_hints_prefix = "=>",
-            max_len_align = false,
-            max_len_align_padding = 1,
-            right_align = false,
-            right_align_padding = 7,
-            highlight = "Comment",
-          },
-          hover_actions = {
-            border = {
-              { "╭", "FloatBorder" },
-              { "─", "FloatBorder" },
-              { "╮", "FloatBorder" },
-              { "│", "FloatBorder" },
-              { "╯", "FloatBorder" },
-              { "─", "FloatBorder" },
-              { "╰", "FloatBorder" },
-              { "│", "FloatBorder" },
-            },
-            auto_focus = true,
-          },
-        },
-        server = {
-          on_attach = function(_, bufnr)
-            require("lvim.lsp").common_on_attach(_, bufnr)
-            -- Hover actions
-            vim.keymap.set("n", "<C-space>", rust_tools.hover_actions.hover_actions, { buffer = bufnr })
-            -- Code action groups
-            vim.keymap.set("n", "<Leader>a", rust_tools.code_action_group.code_action_group, { buffer = bufnr })
-          end,
-          on_init = require("lvim.lsp").common_on_init,
-          settings = {
-            ["rust-analyzer"] = {
-              checkOnSave = {
-                command = "clippy",
-              },
-            },
-          },
-        },
-      }
-      local extension_path = vim.fn.expand("~/") .. ".vscode-insiders/extensions/vadimcn.vscode-lldb-1.9.0/"
-
-      local codelldb_path = extension_path .. "adapter/codelldb"
-      local liblldb_path = extension_path .. "lldb/lib/liblldb.dylib"
-
-      opts.dap = {
-        adapter = require("rust-tools.dap").get_codelldb_adapter(codelldb_path, liblldb_path),
-      }
-      rust_tools.setup(opts)
-    end,
-    ft = { "rust", "rs" },
-  },
   { "github/copilot.vim" },
   {
     "zbirenbaum/copilot.lua",
@@ -498,13 +324,6 @@ return {
           copilot_cmp._on_insert_enter({})
         end
       end)
-    end,
-  },
-  {
-    "phaazon/hop.nvim",
-    event = "BufRead",
-    config = function()
-      require("hop").setup()
     end,
   },
   {
