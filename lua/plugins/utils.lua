@@ -26,7 +26,6 @@ return {
       "Glgrep",
       "Gedit",
     },
-    ft = { "fugitive" },
   },
   { "tpope/vim-eunuch" },
   {
@@ -49,5 +48,12 @@ return {
     config = function()
       require("window-picker").setup()
     end,
+  },
+  {
+    "folke/lsp-colors.nvim",
+    event = "BufRead",
+  },
+  {
+    "ggandor/leap.nvim",
   },
 }
