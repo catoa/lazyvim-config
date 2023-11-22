@@ -28,6 +28,7 @@ return {
     },
   },
   { "tpope/vim-eunuch" },
+  { "tpope/vim-sleuth" },
   {
     "iamcco/markdown-preview.nvim",
     build = function()
