@@ -48,7 +48,4 @@ return {
     "folke/lsp-colors.nvim",
     event = "BufRead",
   },
-  {
-    "ggandor/leap.nvim",
-  },
 }

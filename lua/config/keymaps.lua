@@ -17,5 +17,3 @@ keymap.set(
   "<cmd>Telescope find_files find_command=rg,--ignore,--hidden,--files prompt_prefix=🔍 <CR>",
   opts
 )
-keymap.set("n", "<C-_>", "gcc", { remap = true, silent = true, desc = "Comment line" })
-keymap.set("x", "<C-_>", "gc", { remap = true, silent = true, desc = "Comment selection" })
