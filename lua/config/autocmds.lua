@@ -16,8 +16,10 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 vim.api.nvim_create_autocmd("BufEnter", {
-  pattern = { "yml", "yaml" },
-  command = "set foldmethod=indent",
+  pattern = { "*.yml", "*.yaml" },
+  callback = function()
+    vim.cmd("set foldmethod=indent")
+  end,
 })
 
 vim.api.nvim_create_autocmd("BufEnter", {

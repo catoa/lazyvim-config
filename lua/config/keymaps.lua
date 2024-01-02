@@ -10,10 +10,12 @@ keymap.set("n", "<M-Right>", "<cmd>vertical resize +2<cr>")
 keymap.set("n", "<M-Up>", "<cmd>horizontal resize +2<cr>")
 keymap.set("n", "<M-Down>", "<cmd>horizontal resize -2<cr>")
 
-keymap.set("n", "<leader>fP", "<cmd>Telescope projects<cr>")
 keymap.set(
   "n",
   "<leader>ff",
   "<cmd>Telescope find_files find_command=rg,--ignore,--hidden,--files prompt_prefix=🔍 <CR>",
   opts
 )
+keymap.set("n", "<leader>gV", "<cmd>!gh pr view --web<cr>")
+keymap.set("n", "<leader>gP", "<cmd>!gh pr create --web<cr>")
+keymap.set("n", "<leader>gB", "<cmd>G blame<cr>")
