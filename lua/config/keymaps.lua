@@ -18,4 +18,5 @@ keymap.set(
 )
 keymap.set("n", "<leader>gV", "<cmd>!gh pr view --web<cr>")
 keymap.set("n", "<leader>gP", "<cmd>!gh pr create --web<cr>")
-keymap.set("n", "<leader>gB", "<cmd>G blame<cr>")
+keymap.set("n", "<leader>gR", "<cmd>!gh repo view --web<cr>")
+keymap.set("n", "<leader>gB", "<cmd>Git blame<cr>")
