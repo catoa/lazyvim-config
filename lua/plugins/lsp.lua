@@ -17,6 +17,7 @@ return {
       require("gh-actions").setup(opts)
     end,
   },
+  { "gleam-lang/gleam.vim", ft = "gleam" },
   {
     "neovim/nvim-lspconfig",
     dependencies = {
