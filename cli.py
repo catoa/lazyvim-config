@@ -4,10 +4,9 @@ import sys
 
 # @app.command()
 def thistest():
-    for line in sys.stdin:
-        print(line)
+    x = sys.stdin.readlines()
     # x = input()
-    # print(x.split())
+    print(x)
     # pr_body = json.loads(pr_body)
     # typer.echo(f"Hello {pr_body['action']}")
 
