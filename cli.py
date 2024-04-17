@@ -4,7 +4,7 @@ import json
 # @app.command()
 def thistest():
     x = input()
-    print(x)
+    print(x.split())
     # pr_body = json.loads(pr_body)
     # typer.echo(f"Hello {pr_body['action']}")
 
