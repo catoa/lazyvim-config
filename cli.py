@@ -3,7 +3,7 @@ import sys
 
 # @app.command()
 def thistest():
-    x = [line.strip() for line in sys.stdin.readlines() if line]
+    x = [line.strip() for line in sys.stdin.readlines() if line.strip()]
     # x = input()
     print(x)
     # pr_body = json.loads(pr_body)
