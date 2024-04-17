@@ -1,16 +1,13 @@
 import sys
 
+PR_SECTION_HEADER = "## Pull Request Branches"
 
-# @app.command()
-def thistest():
-    x = [line.strip() for line in sys.stdin.readlines() if line.strip()]
-    pr_section = x[x.index("## Pull Request Branches") :]
+
+def main():
+    lines = [line.strip() for line in sys.stdin.readlines() if line.strip()]
+    pr_section = lines[lines.index(PR_SECTION_HEADER) :]
     print(pr_section)
-    # x = input()
-    print(x)
-    # pr_body = json.loads(pr_body)
-    # typer.echo(f"Hello {pr_body['action']}")
 
 
 if __name__ == "__main__":
-    thistest()
+    main()
