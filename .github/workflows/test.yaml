@@ -11,4 +11,4 @@ jobs:
         with:
           python-version: "3.12"
       - name: Execute CLI
-        run: python cli.py ${{ toJson(github.event.pull_request) }}
+        run: python cli.py ${{ fromJson(github.event.pull_request) }}

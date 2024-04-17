@@ -1,13 +1,11 @@
 import sys
 
+import json
+
 
 def main():
-
-    if len(sys.argv) > 1:
-        text = " ".join(sys.argv[1:])
-        print("Input text:", text.split())
-    else:
-        print("No input text provided.")
+    print(json.dumps({"hello": "world"}))
+    print(json.loads(sys.argv[1]))
 
 
 if __name__ == "__main__":
