@@ -17,9 +17,9 @@ def main():
     print(f"Branches: {branches}")
 
     def parse_repo_and_branch_name(branch):
-        app_name, branch = tuple(branch.replace("-", "", 1).strip().split(":").strip())
+        app_name, branch = tuple(branch.replace("-", "", 1).strip().split(":"))
         selected, app_name = app_name.split()
-        return PullRequestEnvBranch(app_name, branch, selected == "[x]".lower())
+        return PullRequestEnvBranch(app_name, branch.strip(), selected == "[x]".lower())
 
     print([parse_repo_and_branch_name(branch) for branch in branches])
 
