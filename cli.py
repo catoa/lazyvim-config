@@ -1,12 +1,13 @@
-import sys
-
 import json
 
 
-def main():
-    print(json.dumps({"hello": "world"}))
-    print(json.loads(sys.argv[1]))
+# @app.command()
+def thistest():
+    x = input()
+    print(json.loads(x))
+    # pr_body = json.loads(pr_body)
+    # typer.echo(f"Hello {pr_body['action']}")
 
 
 if __name__ == "__main__":
-    main()
+    thistest()
