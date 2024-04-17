@@ -6,7 +6,7 @@ PR_SECTION_HEADER = "## Pull Request Branches"
 def main():
     lines = [line.strip() for line in sys.stdin.readlines() if line.strip()]
     branches = lines[lines.index(PR_SECTION_HEADER) + 1 :]
-    print([branch[1:].split("-") for branch in branches])
+    print(f"Branches: {branches}")
 
 
 if __name__ == "__main__":

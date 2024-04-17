@@ -10,8 +10,6 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - run: echo "${{ toJson(github.event.pull_request) }}"
-        continue-on-error: true
       - name: Execute CLI
         run: |
           echo "${{ github.event.pull_request.body }}" | python cli.py
