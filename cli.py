@@ -1,10 +1,13 @@
 import json
+import sys
 
 
 # @app.command()
 def thistest():
-    x = input()
-    print(x.split())
+    for line in sys.stdin:
+        print(line)
+    # x = input()
+    # print(x.split())
     # pr_body = json.loads(pr_body)
     # typer.echo(f"Hello {pr_body['action']}")
 
