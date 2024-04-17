@@ -21,7 +21,7 @@ class PullRequestEnvBranch:
 
 
 def main():
-    lines = [line.strip() for line in sys.stdin.readlines() if line.strip()]
+    lines = [line for line in map(lambda s: s.strip(), sys.stdin.readlines()) if line]
     branches = lines[lines.index(PR_SECTION_HEADER) + 1 :]
     print(f"Branches: {branches}")
 
