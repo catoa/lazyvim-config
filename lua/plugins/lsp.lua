@@ -1,7 +1,7 @@
 return {
   { "MunifTanjim/prettier.nvim" },
   { "MunifTanjim/eslint.nvim" },
-  { "rust-lang/rust.vim" },
+  -- { "rust-lang/rust.vim" },
   { "cappyzawa/starlark.vim" },
   {
     "topaxi/gh-actions.nvim",
@@ -34,6 +34,9 @@ return {
     },
     ---@class PluginLspOpts
     opts = {
+      servers = {
+        gleam = {},
+      },
       -- you can do any additional lsp server setup here
       -- return true if you don't want this server to be setup with lspconfig
       ---@type table<string, fun(server:string, opts:_.lspconfig.options):boolean?>
