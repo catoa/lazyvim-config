@@ -9,7 +9,7 @@ return {
         "shellcheck",
         "shfmt",
         "flake8",
-        exclue = { "pyright" },
+        exclude = { "pyright" },
       },
     },
   },

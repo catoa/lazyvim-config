@@ -5,10 +5,10 @@ return {
       "nvim-lua/plenary.nvim",
     },
   },
-  {
-    "folke/trouble.nvim",
-    opts = { use_diagnostic_signs = true },
-  },
+  -- {
+  --   "folke/trouble.nvim",
+  --   opts = { use_diagnostic_signs = true },
+  -- },
   {
     "tpope/vim-fugitive",
     cmd = {
