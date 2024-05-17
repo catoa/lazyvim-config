@@ -1,31 +1,45 @@
 import sys
-from dataclasses import dataclass
+import json
+import dataclasses
 
 
 from typing import Self
 
 PR_SECTION_HEADER = "## Pull Request Branches"
+REPO_BRANCH_SEP = ":"
+
+ALLOWED_REPOS = [
+    "leaflogix",
+    "back-office",
+    "Armageddon",
+    "DutchiePay",
+    "Dutchie",
+]
 
 
-@dataclass
+@dataclasses.dataclass
 class PullRequestEnvBranch:
-    app_name: str
-    branch: str
+    repo_name: str
     selected: bool
+    branch: str = "develop"
 
     @classmethod
     def from_line(cls, line) -> Self:
-        app_name, branch = tuple(line.replace("-", "", 1).strip().split(":"))
-        selected, app_name = app_name.split()
-        return cls(app_name, branch.strip(), selected == "[x]".lower())
+        repo_name, branch = tuple(
+            line.replace("-", "", 1).strip().split(REPO_BRANCH_SEP)
+        )
+        selection, repo_name = repo_name.split()
+        selected = selection == "[x]".lower()
+        return cls(repo_name, branch.strip(), selected)
 
 
 def main():
-    lines = [line for line in map(lambda s: s.strip(), sys.stdin.readlines()) if line]
-    branches = lines[lines.index(PR_SECTION_HEADER) + 1 :]
-    print(f"Branches: {branches}")
-
-    print([PullRequestEnvBranch.from_line(branch) for branch in branches])
+    pr_desc_lines = [
+        line for line in map(lambda s: s.strip(), sys.stdin.readlines()) if line
+    ]
+    branches = pr_desc_lines[pr_desc_lines.index(PR_SECTION_HEADER) + 1 :]
+    pr_branches = [PullRequestEnvBranch.from_line(branch) for branch in branches]
+    print(json.dumps([dataclasses.asdict(pr_branch) for pr_branch in pr_branches]))
 
 
 if __name__ == "__main__":
