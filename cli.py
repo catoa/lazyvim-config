@@ -30,7 +30,7 @@ class PullRequestEnvBranch:
         )
         selection, repo_name = repo_name.split()
         selected = selection == "[x]".lower()
-        return cls(repo_name, branch.strip(), selected)
+        return cls(repo_name, selected, branch.strip())
 
 
 def main():
