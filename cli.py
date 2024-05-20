@@ -13,9 +13,9 @@ REPO_BRANCH_SEP = ":"
 ALLOWED_REPOS = [
     "leaflogix",
     "back-office",
-    "Armageddon",
-    "DutchiePay",
-    "Dutchie",
+    "armageddon",
+    "dutchiepay",
+    "dutchie",
 ]
 
 
@@ -39,7 +39,6 @@ class PullRequestEnvBranch:
 
 
 def main():
-    # print(PR_DESCRIPTION)
     if PR_DESCRIPTION is None:
         print("No PR description found")
         sys.exit(1)
@@ -48,7 +47,18 @@ def main():
     ]
     branches = pr_desc_lines[pr_desc_lines.index(PR_SECTION_HEADER) + 1 :]
     pr_branches = [PullRequestEnvBranch.from_line(branch) for branch in branches]
-    print(json.dumps([pr_branch.to_dict() for pr_branch in pr_branches]))
+    result = {}
+    for pr_branch in pr_branches:
+        if pr_branch.repo_name in ALLOWED_REPOS:
+            result.update({pr_branch.repo_name: pr_branch.branch})
+        else:
+            print(f"Repo {pr_branch.repo_name} not allowed")
+            sys.exit(1)
+    print(
+        json.dumps(
+            result,
+        )
+    )
 
 
 if __name__ == "__main__":
