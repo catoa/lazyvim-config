@@ -26,4 +26,4 @@ jobs:
     steps:
       - run: |
           echo ${{ needs.test.outputs.branches }}
-          echo ${{ fromJSON(needs.test.outputs.branches) }}
+          # echo ${{ fromJSON(needs.test.outputs.branches) }}

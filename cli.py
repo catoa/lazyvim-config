@@ -12,7 +12,7 @@ REPO_BRANCH_SEP = ":"
 
 ALLOWED_REPOS = [
     "leaflogix",
-    "back-office",
+    "backoffice",
     "armageddon",
     "dutchiepay",
     "dutchie",
@@ -50,7 +50,7 @@ def main():
     result = {}
     for pr_branch in pr_branches:
         if pr_branch.repo_name in ALLOWED_REPOS:
-            result.update({pr_branch.repo_name: pr_branch.branch})
+            result.update({f"{pr_branch.repo_name}_branch": pr_branch.branch})
         else:
             print(f"Repo {pr_branch.repo_name} not allowed")
             sys.exit(1)
