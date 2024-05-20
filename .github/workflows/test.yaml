@@ -18,8 +18,12 @@ jobs:
           echo "branches=$(python cli.py)" >> $GITHUB_OUTPUT
     outputs:
       branches: ${{ steps.parse-branches.outputs.branches }}
+      armageddon_branch: ${{ steps.parse-branches.outputs.armageddon_branch }}
+
   use:
     needs: test
     runs-on: ubuntu-latest
     steps:
-      - run: echo ${{ needs.test.outputs.branches }}
+      - run: |
+          echo ${{ needs.test.outputs.branches }}
+          echo ${{ fromJSON(needs.test.outputs.branches) }}
