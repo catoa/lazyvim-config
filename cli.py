@@ -40,6 +40,12 @@ def main():
     if PR_DESCRIPTION is None:
         print("No PR description found")
         sys.exit(1)
+    print("new line split")
+    for line in PR_DESCRIPTION.split("\n"):
+        print(line)
+    print("normal line split")
+    for line in PR_DESCRIPTION.split():
+        print(line)
     pr_desc_lines = [
         line for line in map(lambda s: s.strip(), PR_DESCRIPTION.split()) if line
     ]
