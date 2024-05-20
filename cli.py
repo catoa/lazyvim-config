@@ -46,12 +46,12 @@ def main():
     print("normal line split")
     for line in PR_DESCRIPTION.split():
         print(line)
-    pr_desc_lines = [
-        line for line in map(lambda s: s.strip(), PR_DESCRIPTION.split()) if line
-    ]
-    branches = pr_desc_lines[pr_desc_lines.index(PR_SECTION_HEADER) + 1 :]
-    pr_branches = [PullRequestEnvBranch.from_line(branch) for branch in branches]
-    print(json.dumps([dataclasses.asdict(pr_branch) for pr_branch in pr_branches]))
+    # pr_desc_lines = [
+    #     line for line in map(lambda s: s.strip(), PR_DESCRIPTION.split()) if line
+    # ]
+    # branches = pr_desc_lines[pr_desc_lines.index(PR_SECTION_HEADER) + 1 :]
+    # pr_branches = [PullRequestEnvBranch.from_line(branch) for branch in branches]
+    # print(json.dumps([dataclasses.asdict(pr_branch) for pr_branch in pr_branches]))
 
 
 if __name__ == "__main__":
