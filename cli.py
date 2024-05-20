@@ -34,6 +34,9 @@ class PullRequestEnvBranch:
         selected = selection == "[x]".lower()
         return cls(repo_name, selected, branch.strip())
 
+    def to_dict(self):
+        return {self.repo_name: {"selected": self.selected, "branch": self.branch}}
+
 
 def main():
     # print(PR_DESCRIPTION)
@@ -45,7 +48,7 @@ def main():
     ]
     branches = pr_desc_lines[pr_desc_lines.index(PR_SECTION_HEADER) + 1 :]
     pr_branches = [PullRequestEnvBranch.from_line(branch) for branch in branches]
-    print(json.dumps([dataclasses.asdict(pr_branch) for pr_branch in pr_branches]))
+    print(json.dumps([pr_branch.to_dict() for pr_branch in pr_branches]))
 
 
 if __name__ == "__main__":
