@@ -5,7 +5,7 @@ on:
 jobs:
   test:
     outputs:
-      branches: ${{ fromJSON(steps.parse-branches.outputs.branches) }}
+      branches: ${{ steps.parse-branches.outputs.branches }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
