@@ -1,10 +1,11 @@
 import sys
 import json
 import dataclasses
-
+import os
 
 from typing import Self
 
+PR_DESCRIPTION = os.getenv("PR_DESCRIPTION")
 PR_SECTION_HEADER = "## Pull Request Branches"
 REPO_BRANCH_SEP = ":"
 
@@ -34,6 +35,7 @@ class PullRequestEnvBranch:
 
 
 def main():
+    print(PR_DESCRIPTION)
     pr_desc_lines = [
         line for line in map(lambda s: s.strip(), sys.stdin.readlines()) if line
     ]
