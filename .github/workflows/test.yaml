@@ -4,8 +4,6 @@ on:
       - main
 jobs:
   test:
-    outputs:
-      branches: ${{ steps.parse-branches.outputs.branches }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -19,6 +17,8 @@ jobs:
         run: |
           PR_BRANCHES_OUTPUT=$(python cli.py)
           echo "branches=$PR_BRANCHES_OUTPUT" >> $GITHUB_OUTPUT
+    outputs:
+      branches: ${{ steps.parse-branches.outputs.branches }}
   use:
     needs: test
     runs-on: ubuntu-latest
