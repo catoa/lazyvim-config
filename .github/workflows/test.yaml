@@ -18,7 +18,7 @@ jobs:
           PR_DESCRIPTION: ${{ github.event.pull_request.body }}
         run: |
           PR_BRANCHES_OUTPUT=$(python cli.py)
-          echo $PR_BRANCHES_OUTPUT
+          echo "branches=$PR_BRANCHES_OUTPUT" >> $GITHUB_OUTPUT
   use:
     needs: test
     runs-on: ubuntu-latest
