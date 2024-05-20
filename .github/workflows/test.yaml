@@ -25,7 +25,7 @@ jobs:
     steps:
       - run: |
           echo ${{ needs.test.outputs.branches }}
-          echo ${{ needs.test.outputs.branches["leaflogix_branch"]}
+          # echo ${{ needs.test.outputs.branches["leaflogix_branch"]}
           echo ${{ needs.test.outputs.branches.armageddon_branch }}
           echo ${{ needs.test.outputs.branches.backoffice_branch }}
           echo ${{ needs.test.outputs.branches.leaflogix_branch }}
