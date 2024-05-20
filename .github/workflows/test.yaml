@@ -15,7 +15,8 @@ jobs:
       - name: Execute CLI
         id: parse-branches
         run: |
-          echo "${{ github.event.pull_request.body }}" | python cli.py >> $GITHUB_OUTPUT
+          PR_BRANCHES_OUTPUT=(echo "${{ github.event.pull_request.body }}" | python cli.py)
+          echo $PR_BRANCHES_OUTPUT
   use:
     needs: test
     runs-on: ubuntu-latest
