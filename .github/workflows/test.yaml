@@ -17,14 +17,13 @@ jobs:
         run: |
           echo "branches=$(python cli.py)" >> $GITHUB_OUTPUT
     outputs:
-      branches: ${{ steps.parse-branches.outputs.branches }}
+      leaflogix_branch: ${{ fromJSON(steps.parse-branches.outputs.branches).leaflogix_branch }}
+      backoffice_branch: ${{ fromJSON(steps.parse-branches.outputs.branches).backoffice_branch }}
 
   use:
     needs: test
     runs-on: ubuntu-latest
     steps:
       - run: |
-          echo ${{ needs.test.outputs.branches }}
-          echo ${{ fromJSON(needs.test.outputs.branches).leaflogix_branch }}
-          echo ${{ needs.test.outputs.branches.backoffice_branch }}
-          echo ${{ needs.test.outputs.branches.leaflogix_branch }}
+          echo ${{ needs.test.outputs.leaflogix_branch }}
+          echo ${{ needs.test.outputs.backoffice_branch }}
