@@ -36,8 +36,11 @@ class PullRequestEnvBranch:
 
 def main():
     print(PR_DESCRIPTION)
+    if PR_DESCRIPTION is None:
+        print("No PR description found")
+        sys.exit(1)
     pr_desc_lines = [
-        line for line in map(lambda s: s.strip(), sys.stdin.readlines()) if line
+        line for line in map(lambda s: s.strip(), PR_DESCRIPTION.split()) if line
     ]
     branches = pr_desc_lines[pr_desc_lines.index(PR_SECTION_HEADER) + 1 :]
     pr_branches = [PullRequestEnvBranch.from_line(branch) for branch in branches]
