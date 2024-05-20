@@ -17,7 +17,7 @@ jobs:
         run: |
           echo "branches=$(python cli.py)" >> $GITHUB_OUTPUT
     outputs:
-      branches: ${{ toJSON(steps.parse-branches.outputs.branches) }}
+      branches: ${{ fromJSON(steps.parse-branches.outputs.branches) }}
 
   use:
     needs: test
