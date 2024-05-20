@@ -54,6 +54,7 @@ def main():
         else:
             print(f"Repo {pr_branch.repo_name} not allowed")
             sys.exit(1)
+
     print(
         json.dumps(
             result,
