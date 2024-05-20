@@ -16,7 +16,7 @@ jobs:
           PR_DESCRIPTION: ${{ github.event.pull_request.body }}
         run: |
           PR_BRANCHES_OUTPUT=$(python cli.py)
-          echo "branches=$PR_BRANCHES_OUTPUT" >> $GITHUB_OUTPUT
+          # echo "branches=$PR_BRANCHES_OUTPUT" >> $GITHUB_OUTPUT
     outputs:
       branches: ${{ steps.parse-branches.outputs.branches }}
   use:
