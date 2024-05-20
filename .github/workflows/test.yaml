@@ -24,6 +24,4 @@ jobs:
     needs: test
     runs-on: ubuntu-latest
     steps:
-      - run: |
-          echo ${{ needs.test.outputs.branches }}
-          # echo ${{ fromJSON(needs.test.outputs.branches) }}
+      - run: echo ${{ needs.test.outputs.branches }}
