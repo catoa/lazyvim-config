@@ -17,7 +17,7 @@ jobs:
         run: |
           echo "branches=$(python cli.py)" >> $GITHUB_OUTPUT
     outputs:
-      branches: ${{ fromJSON(steps.parse-branches.outputs.branches) }}
+      branches: ${{ steps.parse-branches.outputs.branches }}
 
   use:
     needs: test
@@ -25,6 +25,6 @@ jobs:
     steps:
       - run: |
           echo ${{ needs.test.outputs.branches }}
-          echo ${{ needs.test.outputs.branches.armageddon_branch }}
+          echo ${{ fromJSON(needs.test.outputs.branches).leaflogix_branch }}
           echo ${{ needs.test.outputs.branches.backoffice_branch }}
           echo ${{ needs.test.outputs.branches.leaflogix_branch }}
