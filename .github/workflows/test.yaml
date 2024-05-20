@@ -4,6 +4,8 @@ on:
       - main
 jobs:
   test:
+    outputs:
+      branches: ${{ fromJSON(steps.parse-branches.outputs.branches) }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -11,5 +13,11 @@ jobs:
         with:
           python-version: "3.12"
       - name: Execute CLI
+        id: parse-branches
         run: |
-          echo "${{ github.event.pull_request.body }}" | python cli.py
+          echo "${{ github.event.pull_request.body }}" | python cli.py >> $GITHUB_OUTPUT
+  use:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo ${{ needs.test.outputs.branches }}
