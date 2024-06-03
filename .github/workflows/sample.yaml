@@ -19,12 +19,12 @@ jobs:
         id: rc-branch
         run: |
           echo "Branch ${{ github.ref_name }}"
-          if "${{ github.ref_name }}" =~ "r/[0-9]+\.[0-9]+\.[0-9]+"; then
-          echo "we have a match"
-          echo "is_rc_branch=true" >> $GITHUB_OUTPUT
+          if [[ ${{ github.ref_name }} =~ r/[0-9]+\.[0-9]+\.[0-9]+ ]]; then
+            echo "we have a match"
+            echo "is_rc_branch=true" >> $GITHUB_OUTPUT
           else 
-          echo "there is no match"
-          echo "is_rc_branch=false" >> $GITHUB_OUTPUT
+            echo "there is no match"
+            echo "is_rc_branch=false" >> $GITHUB_OUTPUT
           fi
       - name: Echo output
         run: |
