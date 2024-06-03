@@ -24,3 +24,6 @@ jobs:
           else 
             echo "is_rc_branch=false" >> $GITHUB_OUTPUT
           fi
+      - name: Echo output
+        run: |
+          echo ${{ steps.rc-branch.outputs.is_rc_branch }}
