@@ -1,0 +1,29 @@
+on:
+  pull_request:
+    branches:
+      - main
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Execute CLI
+        id: parse-branches
+        env:
+          PR_DESCRIPTION: ${{ github.event.pull_request.body }}
+        run: |
+          echo "branches=$(python cli.py)" >> $GITHUB_OUTPUT
+    outputs:
+      leaflogix_branch: ${{ fromJSON(steps.parse-branches.outputs.branches).leaflogix_branch }}
+      backoffice_branch: ${{ fromJSON(steps.parse-branches.outputs.branches).backoffice_branch }}
+
+  use:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo ${{ needs.test.outputs.leaflogix_branch }}
+          echo ${{ needs.test.outputs.backoffice_branch }}
