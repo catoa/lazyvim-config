@@ -7,7 +7,7 @@ return {
   },
   {
     "scottmckendry/cyberdream.nvim",
-    lazy = false,
+    lazy = "false",
     priority = 1000,
     config = function()
       require("cyberdream").setup({
@@ -18,7 +18,6 @@ return {
         borderless_telescope = true,
         terminal_colors = true,
       })
-      vim.cmd("colorscheme cyberdream") -- set the colorscheme
     end,
   },
 }
