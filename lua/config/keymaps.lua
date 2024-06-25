@@ -25,3 +25,5 @@ keymap.set(
   { noremap = true, silent = true, desc = "Push Empty Commit" }
 )
 keymap.set("n", "<leader>gb", "<cmd>Git blame<cr>")
+keymap.set("n", "<leader>o", "<cmd>Oil<cr>", { noremap = true, silent = true, desc = "Open Oil" })
+keymap.set("n", "<leader>O", require("oil").toggle_float, { noremap = true, silent = true, desc = "Open Oil (float)" })
