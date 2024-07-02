@@ -5,10 +5,6 @@ return {
       "nvim-lua/plenary.nvim",
     },
   },
-  -- {
-  --   "folke/trouble.nvim",
-  --   opts = { use_diagnostic_signs = true },
-  -- },
   {
     "tpope/vim-fugitive",
     cmd = {
@@ -47,5 +43,29 @@ return {
   {
     "folke/lsp-colors.nvim",
     event = "BufRead",
+  },
+  {
+    "stevearc/oil.nvim",
+    opts = {},
+    config = function()
+      require("oil").setup({
+        columns = { "icon" },
+        view_options = {
+          show_hidden = true,
+        },
+      })
+    end,
+    -- Optional dependencies
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+  },
+  { "nvim-neo-tree/neo-tree.nvim", enabled = false },
+  {
+    "OXY2DEV/markview.nvim",
+    dependencies = {
+      "nvim-tree/nvim-web-devicons",
+    },
+    config = function()
+      require("markview").setup()
+    end,
   },
 }
